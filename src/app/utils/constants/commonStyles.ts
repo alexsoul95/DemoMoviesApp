@@ -13,7 +13,7 @@ const commonStyles = StyleSheet.create({
   },
   screenContainer: {
     flex: 1,
-    backgroundColor: colors.white1,
+    backgroundColor: colors.primary,
   },
   center: {
     justifyContent: 'center',

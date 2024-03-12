@@ -12,12 +12,13 @@ export const FONT_SIZE = {
   ultrasmall: 8,
 }
 const fonts = {
-  comfortaa: {
-    light: 'Comfortaa-Light',
-    regular: 'Comfortaa-Regular',
-    medium: 'Comfortaa-Medium',
-    bold: 'Comfortaa-Regular-',
-    semibold: 'Comfortaa-SemiBold'
+  musticaPro: {
+    light: 'MusticaPro-Light',
+    regular: 'MusticaPro-Regular',
+    medium: 'MusticaPro-Medium',
+    bold: 'MusticaPro-Bold',
+    thin: 'MusticaPro-Thin',
+    semibold: 'MusticaPro-SemiBold'
   },
   roboto: {
     light: 'Roboto-Light',
@@ -59,13 +60,9 @@ export const typography = {
   /**
    * The primary font. Used in most places.
    */
-  primary: fonts.roboto,
+  primary: fonts.musticaPro,
   /**
    * An alternate font used for perhaps titles and stuff.
    */
-  secondary: Platform.select({ ios: fonts.helveticaNeue, android: fonts.sansSerif }),
-  /**
-   * Lets get fancy with a monospace font!
-   */
-  code: Platform.select({ ios: fonts.courier, android: fonts.monospace }),
+  secondary: fonts.roboto,
 }

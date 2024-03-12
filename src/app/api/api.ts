@@ -1,38 +1,39 @@
-import { ApiResponse, ApisauceInstance, create } from 'apisauce'
+import { ApiResponse, ApisauceInstance, create, PROBLEM_CODE } from 'apisauce'
+import { AxiosError, AxiosRequestConfig } from 'axios';
 
 import Config from './config';
 import { ENDPOINTS } from './endpoints';
 
-export type ApiData = {
-  statusCode: string,
-  message: string,
-  content: any
+
+export interface ApiErrorReponse<T> {
+  ok: false,
+  problem: PROBLEM_CODE;
+  originalError: AxiosError;
+
+  headers?: {};
+  config?: AxiosRequestConfig;
+  duration?: number;
+  status?: number;
+  data?: T;
 }
-export type ApiResponseType = Promise <{kind: 'ok', data: ApiData} | {kind: 'error', message: string, status: number | undefined}>
+export interface ApiOkResponse<T> {
+  ok: true;
+  problem: null;
+  originalError: null;
+
+  headers?: {};
+  config?: AxiosRequestConfig;
+  duration?: number;
+  status?: number;
+  data?: T;
+}
+export type ApiResponseType<T> = ApiErrorReponse<T> | ApiOkResponse<T>
 
 const apisauce = create({
   baseURL: Config.API_URL,
-  headers: {
-    'language' : `${useStore.getState().global.localization.current.slug}`,
-    'Authorization' : `Bearer ${useStore.getState().profile.token}`
-  },
   timeout: 10000,
 });
-// apisauce.axiosInstance.interceptors.request.use(
-//   (config) => {
-//     const token = useStore.getState().profile.token;
-//     const lang = useStore.getState().global.localization.current.slug;
-//     if (token) {
-//       config.headers.Authorization = `Bearer ${token}`;
-//     }
-//     config.headers.language = lang ? lang : 'ru';
-//     // config.headers['Content-Type'] = 'application/json';
-//     return config;
-//   },
-//   (error) => {
-//     Promise.reject(error);
-//   },
-// );
+
 export class Api {
   apisauce: ApisauceInstance
 
@@ -40,49 +41,15 @@ export class Api {
     this.apisauce = apisauce
   }
   
-  async get(url: typeof ENDPOINTS[keyof typeof ENDPOINTS], params = {}): ApiResponseType {
-    const response: ApiResponse<ApiData> = await this.apisauce.get(url, params);
-    console.log('api get: '+url, params, response.status, response.data, response)
-    if(!response.ok){
-      return {kind: 'error', message: response.data?.message ?? "unexpected error", status: response.status }
-    }
-    try {
-      
-      return {kind: 'ok', data: response.data}
-    } catch (error) {
-      console.error(error, response.data?.message)
-      return {kind: 'error', message: "Что-то пошло не так"}
-    }
+  async get<T>(params = {}): Promise<ApiResponseType<T>> {
+    const response: ApiResponse<T> = await this.apisauce.get("", params);
+    console.log('api get: '+params, response.status, response.data, response)
+    return response
   }
-  async post(url: typeof ENDPOINTS[keyof typeof ENDPOINTS], params = {}): ApiResponseType {
-    const data = params;
-    const response: ApiResponse<ApiData> = await this.apisauce.post(url, data);
-    console.log('api post: '+url, params, response)
-    if(!response.ok){
-      return {kind: 'error', message: response.data?.message ?? "unexpected error", status: response.status }
-    }
-    try {
-      
-      return {kind: 'ok', data: response.data}
-    } catch (error) {
-      console.error(error, response.data?.message)
-      return {kind: 'error', message: "Что-то пошло не так"}
-    }
-  }
-  async delete(url: typeof ENDPOINTS[keyof typeof ENDPOINTS], params = {}): ApiResponseType {
-    const data = params;
-    const response: ApiResponse<ApiData> = await this.apisauce.delete(url, data);
-    console.log('api delete: '+url, params, response.data)
-    if(!response.ok){
-      return {kind: 'error', message: response.data?.message ?? "unexpected error", status: response.status }
-    }
-    try {
-      
-      return {kind: 'ok', data: response.data}
-    } catch (error) {
-      console.error(error, response.data?.message)
-      return {kind: 'error', message: "Что-то пошло не так"}
-    }
+  async post<T>(data = {}): Promise<ApiResponseType<T>> {
+    const response: ApiResponse<T> = await this.apisauce.post("", data);
+    console.log('api post: '+data, response.status, response.data, response)
+    return response
   }
 }
 

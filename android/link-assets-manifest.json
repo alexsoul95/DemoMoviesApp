@@ -2,6 +2,34 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "assets/fonts/MusticaPro/MusticaPro-Bold.otf",
+      "sha1": "2d6a2b2526907e461aadef16ddb6d241086b0b41"
+    },
+    {
+      "path": "assets/fonts/MusticaPro/MusticaPro-Italic.otf",
+      "sha1": "fe4730b4828cb353888e2b93b56c658df3b07c30"
+    },
+    {
+      "path": "assets/fonts/MusticaPro/MusticaPro-Light.otf",
+      "sha1": "4fd025f50c1b7f16d58d7307bdab0550d2d73b09"
+    },
+    {
+      "path": "assets/fonts/MusticaPro/MusticaPro-Medium.otf",
+      "sha1": "c99b39223a7321cc845d37759ab686b46eb56b13"
+    },
+    {
+      "path": "assets/fonts/MusticaPro/MusticaPro-Regular.otf",
+      "sha1": "80e4d470951de600bc56b8782d6910773e05f74e"
+    },
+    {
+      "path": "assets/fonts/MusticaPro/MusticaPro-SemiBold.otf",
+      "sha1": "c2e82615da4bc6a28edfad647964feb282f4444c"
+    },
+    {
+      "path": "assets/fonts/MusticaPro/MusticaPro-Thin.otf",
+      "sha1": "791ee835356a5620936111399bcd1cdcf5210b25"
+    },
+    {
       "path": "assets/fonts/Roboto/LICENSE.txt",
       "sha1": "47b573e3824cd5e02a1a3ae99e2735b49e0256e4"
     },

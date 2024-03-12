@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { StyleProp, ViewStyle } from "react-native";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { commonStyles } from "../utils/constants/commonStyles";
 
 type Props = {
   disableBottomSafeArea?: boolean,
@@ -37,7 +38,7 @@ export const ScreenWrapper = (props: Props) => {
     safeArea.marginLeft = insets.left;
   }
 
-  return <View style={[{flex: 1}, style, safeArea]}>
+  return <View style={[commonStyles.screenContainer, style, safeArea]}>
     {children}
   </View>;
 };

@@ -1,27 +1,11 @@
-import React, {useState} from 'react';
-import { View, Text, Touchable, Pressable } from 'react-native';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-function HomeScreen() {
-  const [count, setCount] = useState(0)
-
-  
-  return (
-    <Pressable onPress={() => {setCount(count+1)}} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>{count}</Text>
-    </Pressable>
-  );
-}
-
-const Stack = createNativeStackNavigator();
+import MainNavigator from './navigators/MainNavigator';
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
+      <MainNavigator/>
     </NavigationContainer>
   );
 }

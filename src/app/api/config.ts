@@ -1,6 +1,6 @@
 const Config = {
-  BASE_URL: 'url',
-  API_URL: 'url'
+  BASE_URL: 'https://search.imdbot.workers.dev/',
+  API_URL: 'https://search.imdbot.workers.dev/'
 }
 
 export default Config;
