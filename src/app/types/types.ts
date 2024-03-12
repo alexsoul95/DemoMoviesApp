@@ -6,7 +6,7 @@ export type LanguageType = {
   dictionary: typeof ru;
 };
 
-export type MovieItemProps = {
+export type MovieShortItemProp = {
   '#TITLE': string;
   '#YEAR': number;
   '#IMDB_ID': string;
@@ -41,7 +41,7 @@ export type MovieShort = {
   name: string;
   image: string;
   description: string;
-  aggregateRating: MovieRating;
+  aggregateRating?: MovieRating;
   contentRating?: string;
   genre: string[];
   datePublished: string;
@@ -94,7 +94,7 @@ export type ActorItemProps = {
     };
   };
 };
-export type MovieProp = {
+export type MovieProp = null | {
   short: MovieShort;
   main: MovieMain;
 };

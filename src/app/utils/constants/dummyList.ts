@@ -1,6 +1,6 @@
-import {MovieItemProps} from '../../types/types';
+import { MovieShortItemProp } from "../../types/types";
 
-export const dummyList: MovieItemProps[] = [
+export const dummyList: MovieShortItemProp[] = [
   {
     '#TITLE': 'Niram',
     '#YEAR': 1999,

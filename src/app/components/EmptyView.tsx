@@ -3,6 +3,7 @@ import React from 'react'
 import AppText from './AppText';
 import Feather from 'react-native-vector-icons/Feather';
 import { colors } from '../theme/colors';
+import { spacing } from '../theme/spacing';
 
 const EmptyView = () => {
   return (
@@ -20,5 +21,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'row',
+    gap: spacing.sm,
   }
 })

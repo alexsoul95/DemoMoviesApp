@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { MovieItemProps } from '../types/types'
+import { MovieShortItemProps } from '../types/types'
 import AppText from './AppText';
 import { spacing } from '../theme/spacing';
 import FastImage from 'react-native-fast-image';
@@ -8,7 +8,7 @@ import Column from './Column';
 import AnimatedButton from './AnimatedButton';
 
 type Props = {
-  item: MovieItemProps;
+  item: MovieShortItemProps;
   onPress: (id: string) => void;
 }
 const placeholderImg = require('../../../assets/images/placeholder.png');

@@ -7,13 +7,9 @@ import {
   BackHandler,
   Alert,
 } from 'react-native';
-import React, {useCallback, useRef, useState} from 'react';
-import {colors} from '../../theme/colors';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {ScreenWrapper} from '../../components/ScreenWrapper';
-import {spacing} from '../../theme/spacing';
-import AppText from '../../components/AppText';
 import MovieItem from '../../components/MovieItem';
-import {MovieItemProps} from '../../types/types';
 import {dummyList} from '../../utils/constants/dummyList';
 import {styles} from './styles';
 import SearchHeader from './SearchHeader';
@@ -21,19 +17,32 @@ import {useFocusEffect} from '@react-navigation/native';
 import SearchOverlay from './SearchOverlay';
 import Separator from '../../components/Separator';
 import {StackScreenProps} from '@react-navigation/stack';
-import { MainStackParams } from '../../navigators/MainNavigator';
+import {MainStackParams} from '../../navigators/MainNavigator';
+import {useStore} from '../../store';
+import LoadingIndicator from '../../components/LoadingIndicator';
+import {MovieShortItemProp} from '../../types/types';
 
 type Props = StackScreenProps<MainStackParams, 'MainScreen'>;
 
 const MainScreen = ({navigation, route}: Props) => {
+  // Store Actions and States
+  const {getMainPage, LOADING, error, data} = useStore(state => state.main);
+  const {getSearchItems, SEARCH_LOADING, searchError, clearSearch, searchData} =
+    useStore(state => state.main);
+
+  // Local Variables
   const [text, setText] = useState('');
   const [isInputFocused, setFocused] = useState(false);
 
   const refInput = useRef<TextInput>(null);
 
-  // const renderItem = ({item}: {item: MovieItemProps}) => (
-  //   <ListItem onPress={onListItemPress} onLike={handleLike} item={item} />
-  // );
+  useEffect(() => {
+    getMainPage();
+  }, []);
+
+  useEffect(() => {
+    getSearchItems(text)
+  }, [text])
 
   useFocusEffect(
     useCallback(() => {
@@ -56,18 +65,19 @@ const MainScreen = ({navigation, route}: Props) => {
   );
 
   const handleOpenSearch = useCallback(() => {
-    // getSearchItems(text)
-    refInput.current?.focus()
-    setFocused(true)
+    getSearchItems(text);
+    refInput.current?.focus();
+    setFocused(true);
   }, [isInputFocused]);
+
   const handleItemPress = (id: string) => {
-    navigation.navigate("MovieScreen", {id})
-  }
+    navigation.navigate('MovieScreen', {id});
+  };
   const handleCloseSearch = useCallback(() => {
     setText('');
     refInput.current?.blur();
-    setFocused(false)
-    // clearSearch()
+    setFocused(false);
+    clearSearch();
   }, [isInputFocused]);
 
   return (
@@ -80,21 +90,22 @@ const MainScreen = ({navigation, route}: Props) => {
         onClose={handleCloseSearch}
         onFocus={handleOpenSearch}
       />
-      <FlatList
-        data={dummyList}
-        renderItem={({item}: {item: MovieItemProps}) => (
-          <MovieItem onPress={handleItemPress} item={item} />
-        )}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={item => item['#IMDB_ID']}
-        ItemSeparatorComponent={() => <Separator />}
-      />
+      {LOADING ? (
+        <LoadingIndicator color={'white'} />
+      ) : (
+        <FlatList
+          data={data}
+          renderItem={({item}: {item: MovieShortItemProp}) => (
+            <MovieItem onPress={handleItemPress} item={item} />
+          )}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={item => item['#IMDB_ID']}
+          ItemSeparatorComponent={() => <Separator />}
+        />
+      )}
 
       {isInputFocused && (
-        <SearchOverlay
-          searchItems={dummyList}
-          isLoading={false}
-        />
+        <SearchOverlay itemPress={handleItemPress} searchItems={searchData} isLoading={SEARCH_LOADING} />
       )}
     </ScreenWrapper>
   );

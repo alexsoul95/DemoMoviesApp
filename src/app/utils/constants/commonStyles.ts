@@ -1,5 +1,5 @@
 import { StyleSheet} from 'react-native';
-import { useStore } from '../../state';
+import { useStore } from '../../store';
 import { colors } from '../../theme/colors';
 import { spacing } from '../../theme/spacing';
 import { typography } from '../../theme/typography';
@@ -34,23 +34,6 @@ const commonStyles = StyleSheet.create({
     justifyContent: 'center', 
     alignItems: 'center'
   },
-  inputText: {
-    width: '100%',
-    fontSize: 16,
-    color: 'black',
-    fontFamily: typography.primary.regular,
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingLeft: 0,
-    
-  },
-  buttonStyle: {
-    padding: spacing.sm,
-    borderRadius: 10, 
-    width: '100%', 
-    backgroundColor: useStore.getState().global.colors.primary, 
-    alignItems: 'center'
-  }
 });
 
 export {commonStyles};
