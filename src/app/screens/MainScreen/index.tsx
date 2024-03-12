@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextInput,
   BackHandler,
+  Alert,
 } from 'react-native';
 import React, {useCallback, useRef, useState} from 'react';
 import {colors} from '../../theme/colors';
@@ -19,8 +20,12 @@ import SearchHeader from './SearchHeader';
 import {useFocusEffect} from '@react-navigation/native';
 import SearchOverlay from './SearchOverlay';
 import Separator from '../../components/Separator';
+import {StackScreenProps} from '@react-navigation/stack';
+import { MainStackParams } from '../../navigators/MainNavigator';
 
-const MainScreen = () => {
+type Props = StackScreenProps<MainStackParams, 'MainScreen'>;
+
+const MainScreen = ({navigation, route}: Props) => {
   const [text, setText] = useState('');
   const [isInputFocused, setFocused] = useState(false);
 
@@ -55,7 +60,9 @@ const MainScreen = () => {
     refInput.current?.focus()
     setFocused(true)
   }, [isInputFocused]);
-
+  const handleItemPress = (id: string) => {
+    navigation.navigate("MovieScreen", {id})
+  }
   const handleCloseSearch = useCallback(() => {
     setText('');
     refInput.current?.blur();
@@ -76,7 +83,7 @@ const MainScreen = () => {
       <FlatList
         data={dummyList}
         renderItem={({item}: {item: MovieItemProps}) => (
-          <MovieItem item={item} />
+          <MovieItem onPress={handleItemPress} item={item} />
         )}
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item['#IMDB_ID']}

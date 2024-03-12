@@ -4,7 +4,7 @@
 import { Platform } from "react-native"
 
 export const FONT_SIZE = {
-  title: 22,
+  title: 28,
   large: 20,
   small: 12,
   semismall: 14,

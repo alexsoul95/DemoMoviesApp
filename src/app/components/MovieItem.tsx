@@ -1,22 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { MovieItemProps } from '../types/types'
 import AppText from './AppText';
 import { spacing } from '../theme/spacing';
 import FastImage from 'react-native-fast-image';
 import Column from './Column';
+import AnimatedButton from './AnimatedButton';
 
 type Props = {
-  item: MovieItemProps
+  item: MovieItemProps;
+  onPress: (id: string) => void;
 }
 const placeholderImg = require('../../../assets/images/placeholder.png');
 
-const MovieItem = ({item} : Props) => {
+const MovieItem = ({item, onPress} : Props) => {
 
   const img = item['#IMG_POSTER']
 
   return (
-    <View style={styles.container}>
+    <Pressable onPress={() => onPress(item['#IMDB_ID'])} style={styles.container}>
       <View style={{flex: .3}}>
         <FastImage
             style={{flex: 1}}
@@ -31,7 +33,7 @@ const MovieItem = ({item} : Props) => {
         {!!item['#ACTORS'] && <Column name={'Actors'} numOfLines={3} description={item['#ACTORS']}/>}
 
       </View>
-    </View>
+    </Pressable>
   )
 }
 

@@ -1,6 +1,6 @@
 const colors = {
     primary: '#1D1D26',
-    
+    primaryRgba: 'rgba(29, 29, 38, 1)',
     transparent: 'transparent',
     black1: '#000000',
     black2: 'rgba(8, 20, 29, 0.6)',
@@ -15,6 +15,8 @@ const colors = {
 
     blue1: '#008DF6',
     blue2: '#2F5E9C',
+
+    rating: '#EA6067'
 }
 
 export {colors}

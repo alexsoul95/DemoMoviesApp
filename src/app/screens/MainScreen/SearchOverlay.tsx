@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     padding: spacing.md,
     position: 'absolute',
-    top: SEARCH_H + 2*spacing.md,
+    top: SEARCH_H + spacing.md,
     bottom: 0,
     right: 0, 
     left: 0,

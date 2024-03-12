@@ -19,6 +19,12 @@ const commonStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm
+  },
+
   absoluteCenter: {
     position: 'absolute', 
     top: 0, 

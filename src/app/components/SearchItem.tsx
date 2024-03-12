@@ -5,6 +5,7 @@ import AppText from './AppText';
 import { spacing } from '../theme/spacing';
 import FastImage from 'react-native-fast-image';
 import Column from './Column';
+import AnimatedButton from './AnimatedButton';
 
 type Props = {
   item: MovieItemProps
@@ -16,7 +17,7 @@ const SearchItem = ({item} : Props) => {
   const img = item['#IMG_POSTER']
 
   return (
-    <View style={styles.container}>
+    <AnimatedButton style={styles.container}>
       <View style={{flex: .3}}>
         <FastImage
             style={{flex: 1}}
@@ -27,7 +28,7 @@ const SearchItem = ({item} : Props) => {
       <View style={styles.contentContainer}>
         {!!item['#TITLE'] && <AppText weight='semibold'>{item['#TITLE']}</AppText>}
       </View>
-    </View>
+    </AnimatedButton>
   )
 }
 
