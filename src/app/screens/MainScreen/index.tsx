@@ -26,6 +26,7 @@ type Props = StackScreenProps<MainStackParams, 'MainScreen'>;
 
 const MainScreen = ({navigation, route}: Props) => {
   // Store Actions and States
+  // TODO: handle error message
   const {getMainPage, LOADING, error, data} = useStore(state => state.main);
   const {getSearchItems, SEARCH_LOADING, searchError, clearSearch, searchData} =
     useStore(state => state.main);

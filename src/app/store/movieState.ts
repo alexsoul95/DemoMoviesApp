@@ -2,6 +2,8 @@ import { api } from "../api/api";
 import { MovieProp } from "../types/types";
 import { MovieType, StateSlice } from "./types";
 
+//states from movie screen
+
 const initialState = {
   LOADING: false,
   data: null,

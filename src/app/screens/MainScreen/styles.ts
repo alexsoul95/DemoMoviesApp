@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
   },
   searchStyle: {
     height: SEARCH_H,
-    flex: 1,
+    width: '100%',
     paddingHorizontal: spacing.xs,
     borderRadius: 10,
     alignItems: 'center',

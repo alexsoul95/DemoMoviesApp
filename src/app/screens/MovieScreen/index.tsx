@@ -51,19 +51,6 @@ const MovieScreen = ({navigation, route}: Props) => {
     }
   }, [id]);
 
-  const onScroll = () => Animated.event(
-    [
-      {
-        nativeEvent: {
-          contentOffset: {
-            y: yOffset,
-          },
-        },
-      },
-    ],
-    { useNativeDriver: true }
-  )
-
   return (
     <ScreenWrapper>
       <Animated.View style={[styles.headerAbsolute, {opacity: headerOpacity}]}>

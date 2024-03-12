@@ -1,4 +1,23 @@
+## Instructions
+When you download after you need to run these 3 commands:
+
+```
+yarn install
+```
+```
+yarn start --reset-cache
+```
+```
+cd ios/ && pod install
+yarn ios
+```
+or
+```
+yarn android
+```
+
 ## Project structure
+
 
 ```bash
 src/
@@ -10,16 +29,16 @@ src/
 │   ├── components/
 │   ├── localization/
 │   ├── navigators/
-│   │   ├── AppNavigator/
-│   │   ├── AuthNavigator/
+│   │   ├── RootNavigator
+│   │   ├── MainNavigator
 │   │   └── ...
 │   ├── screens/
-│   │   ├── Home/
-│   │   ├── Profile/
+│   │   ├── Screen1/
+│   │   ├── Screen2/
 │   │   └── ...
 │   ├── services/
 │   ├── utils/
-│   ├── redux/
+│   ├── store/
 │   │   ├── actions/
 │   │   ├── reducers/
 │   │   ├── selectors/

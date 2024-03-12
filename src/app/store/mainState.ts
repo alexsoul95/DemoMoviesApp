@@ -3,6 +3,8 @@ import { GET_SEARCH_TYPE } from "../api/api.types";
 import { MovieShortItemProp } from "../types/types";
 import { MainType, StateSlice } from "./types";
 
+//states from main screen
+
 const initialState = {
   LOADING: false,
   SEARCH_LOADING: false,
