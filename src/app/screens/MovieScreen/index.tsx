@@ -1,4 +1,4 @@
-import {View, Text, ScrollView, StyleSheet, FlatList, Animated} from 'react-native';
+import {View, Text, ScrollView, StyleSheet, FlatList, Animated, Alert} from 'react-native';
 import React, {useEffect, useRef} from 'react';
 import {ScreenWrapper} from '../../components/ScreenWrapper';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -18,6 +18,7 @@ import ReviewItem from '../../components/ReviewItem';
 import KeywordItem from '../../components/KeywordItem';
 import { useStore } from '../../store';
 import LoadingIndicator from '../../components/LoadingIndicator';
+import { styles } from './styles';
 
 type Props = StackScreenProps<MainStackParams, 'MovieScreen'>;
 
@@ -51,6 +52,12 @@ const MovieScreen = ({navigation, route}: Props) => {
     }
   }, [id]);
 
+  useEffect(() => {
+    if(error){
+      Alert.alert(error)
+    }
+  }, [error])
+  
   return (
     <ScreenWrapper>
       <Animated.View style={[styles.headerAbsolute, {opacity: headerOpacity}]}>
@@ -146,45 +153,4 @@ const MovieScreen = ({navigation, route}: Props) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    paddingBottom: spacing.md,
-  },
-  imageContainer: {
-    width: '100%',
-    height: undefined,
-    aspectRatio: 0.675,
-    top: 0,
-    left: 0,
-    right: 0
-  },
-  headerAbsolute: {
-    backgroundColor: 'transparent',
-    position: 'absolute', 
-    top: 0, 
-    left: 0, 
-    right: 0, 
-    zIndex: 10, 
-    paddingHorizontal: spacing.md
-  },
-  titleContainer: {
-    position: 'absolute',
-    bottom: 0, 
-    left: 0, 
-    right: 0, 
-    zIndex: 10, 
-    paddingHorizontal: spacing.md,
-    gap: spacing.sm
-  },
-  contentContainer: {
-    paddingHorizontal: spacing.md,
-  },
-  keywordsContainer: {
-    flex: 1, 
-    flexDirection: 'row', 
-    flexWrap: 'wrap',
-    gap: spacing.sm
-  }
-});
 export default MovieScreen;

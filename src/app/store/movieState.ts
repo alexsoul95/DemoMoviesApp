@@ -1,4 +1,5 @@
 import { api } from "../api/api";
+import { getGeneralApiProblem } from "../api/api.problem";
 import { MovieProp } from "../types/types";
 import { MovieType, StateSlice } from "./types";
 
@@ -19,7 +20,7 @@ export const creteMovieSlice: StateSlice<MovieType> = (set, get) => ({
     if(resp.ok && data){
       set(state => {state.movie.data = data})
     } else {
-      set(state => {state.main.error = resp.problem})
+      set(state => {state.main.error = getGeneralApiProblem(resp) ?? 'Unexpected error'})
     }
     set(state => {state.movie.LOADING = false})
   }

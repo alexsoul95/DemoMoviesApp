@@ -1,4 +1,5 @@
 import { api } from "../api/api";
+import { getGeneralApiProblem } from "../api/api.problem";
 import { GET_SEARCH_TYPE } from "../api/api.types";
 import { MovieShortItemProp } from "../types/types";
 import { MainType, StateSlice } from "./types";
@@ -24,7 +25,7 @@ export const createMainSlice: StateSlice<MainType> = (set, get) => ({
       const {description} = data;
       set(state => {state.main.data = description ?? []})
     } else {
-      set(state => {state.main.error = resp.problem})
+      set(state => {state.main.error = getGeneralApiProblem(resp) ?? 'Unexpected error'})
     }
     set(state => {state.main.LOADING = false})
   },

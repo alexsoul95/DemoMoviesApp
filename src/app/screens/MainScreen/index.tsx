@@ -26,7 +26,6 @@ type Props = StackScreenProps<MainStackParams, 'MainScreen'>;
 
 const MainScreen = ({navigation, route}: Props) => {
   // Store Actions and States
-  // TODO: handle error message
   const {getMainPage, LOADING, error, data} = useStore(state => state.main);
   const {getSearchItems, SEARCH_LOADING, searchError, clearSearch, searchData} =
     useStore(state => state.main);
@@ -44,6 +43,12 @@ const MainScreen = ({navigation, route}: Props) => {
   useEffect(() => {
     getSearchItems(text)
   }, [text])
+
+  useEffect(() => {
+    if(error){
+      Alert.alert(error)
+    }
+  }, [error])
 
   useFocusEffect(
     useCallback(() => {
